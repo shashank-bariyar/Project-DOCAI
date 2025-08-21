@@ -17,22 +17,22 @@ def text_to_speech_with_gtts_old(input_text, output_filepath):
     audioobj.save(output_filepath)
 
 
-input_text="Hi this is Ai with Hassan!"
+input_text="Hi this is shashank"
 text_to_speech_with_gtts_old(input_text=input_text, output_filepath="gtts_testing.mp3")
 
 #Step1b: Setup Text to Speech–TTS–model with ElevenLabs
 import elevenlabs
 from elevenlabs.client import ElevenLabs
 
-ELEVENLABS_API_KEY=os.environ.get("ELEVEN_API_KEY")
+ELEVENLABS_API_KEY=os.environ.get("ELEVENLABS_API_KEY")
 
 def text_to_speech_with_elevenlabs_old(input_text, output_filepath):
     client=ElevenLabs(api_key=ELEVENLABS_API_KEY)
-    audio=client.generate(
+    audio=client.text_to_speech.convert(
         text= input_text,
-        voice= "Aria",
+        voice_id= "Xb7hH8MSUJpSbSDYk0k2",
         output_format= "mp3_22050_32",
-        model= "eleven_turbo_v2"
+        model_id= "eleven_turbo_v2"
     )
     elevenlabs.save(audio, output_filepath)
 
@@ -53,18 +53,7 @@ def text_to_speech_with_gtts(input_text, output_filepath):
     )
     audioobj.save(output_filepath)
     os_name = platform.system()
-    try:
-        if os_name == "Darwin":  # macOS
-            subprocess.run(['afplay', output_filepath])
-        elif os_name == "Windows":  # Windows
-            subprocess.run(['powershell', '-c', f'(New-Object Media.SoundPlayer "{output_filepath}").PlaySync();'])
-        elif os_name == "Linux":  # Linux
-            subprocess.run(['aplay', output_filepath])  # Alternative: use 'mpg123' or 'ffplay'
-        else:
-            raise OSError("Unsupported operating system")
-    except Exception as e:
-        print(f"An error occurred while trying to play the audio: {e}")
-
+    
 
 input_text="Hi this is Ai with Hassan, autoplay testing!"
 #text_to_speech_with_gtts(input_text=input_text, output_filepath="gtts_testing_autoplay.mp3")
@@ -72,24 +61,13 @@ input_text="Hi this is Ai with Hassan, autoplay testing!"
 
 def text_to_speech_with_elevenlabs(input_text, output_filepath):
     client=ElevenLabs(api_key=ELEVENLABS_API_KEY)
-    audio=client.generate(
+    audio=client.text_to_speech.convert(
         text= input_text,
-        voice= "Aria",
+        voice_id= "Xb7hH8MSUJpSbSDYk0k2",
         output_format= "mp3_22050_32",
-        model= "eleven_turbo_v2"
+        model_id= "eleven_turbo_v2"
     )
     elevenlabs.save(audio, output_filepath)
     os_name = platform.system()
-    try:
-        if os_name == "Darwin":  # macOS
-            subprocess.run(['afplay', output_filepath])
-        elif os_name == "Windows":  # Windows
-            subprocess.run(['powershell', '-c', f'(New-Object Media.SoundPlayer "{output_filepath}").PlaySync();'])
-        elif os_name == "Linux":  # Linux
-            subprocess.run(['aplay', output_filepath])  # Alternative: use 'mpg123' or 'ffplay'
-        else:
-            raise OSError("Unsupported operating system")
-    except Exception as e:
-        print(f"An error occurred while trying to play the audio: {e}")
-
+    
 #text_to_speech_with_elevenlabs(input_text, output_filepath="elevenlabs_testing_autoplay.mp3")

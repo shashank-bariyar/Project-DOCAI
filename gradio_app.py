@@ -32,7 +32,7 @@ def process_inputs(audio_filepath, image_filepath):
         
     voice_of_doctor = text_to_speech_with_elevenlabs(input_text=doctor_response, output_filepath="final.mp3")
     
-    return speech_to_text_output, doctor_response, voice_of_doctor
+    return speech_to_text_output, doctor_response, "final.mp3"
     
 
 #create the interface
@@ -45,7 +45,8 @@ iface = gr.Interface(
     outputs=[
         gr.Textbox(label="Speech to Text"),
         gr.Textbox(label="DOCTOR'S RESPONSE"),
-        gr.Audio("Temp.mp3")
+        gr.Audio(label="Doctor's Voice", autoplay=True)
+        
     ],
     title="DOCAI IS HERE"
     #decription - up;oad and image and interect via voice or audio

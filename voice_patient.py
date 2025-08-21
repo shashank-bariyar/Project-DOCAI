@@ -4,7 +4,9 @@ import speech_recognition as sr
 from pydub import AudioSegment
 from io import BytesIO
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(messages)s')
+# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(messages)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def record_audio(file_path, timeout=20, phrase_time_limit=None):
     """
@@ -39,7 +41,7 @@ def record_audio(file_path, timeout=20, phrase_time_limit=None):
         logging.error(f"An error occured: {e}")
 
 audio_filepath="patient_voice_test.mp3"
-record_audio(file_path=audio_filepath)
+#record_audio(file_path=audio_filepath)
 
 #step2: setup speech to text STT model for transcription
 import os
